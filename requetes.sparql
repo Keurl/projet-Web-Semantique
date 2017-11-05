@@ -1,0 +1,11 @@
+
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?titre ?date_de_debut
+FROM <testr.rdf>
+WHERE { ?titre xsd:date ?date_de_debut.
+		FILTER( ?date_de_debut < 2009)
+}
+
+
+/* requête multi dataset : liste des organisations ayant participés à la fois à notre dataset et à celui de l'autre groupe */
