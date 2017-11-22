@@ -12,12 +12,7 @@ CONSTRUCT {
 	xsd:string ?code_du_projet;
 	doap:name ?titre;
 	xsd:string ?Acronyme;
-	dbp:number ?Id_part;
-	xsd:string ?type_d_identifiant;
 	rdfs:label ?libelle_de_partenaire;
-	xsd:string ?sigle_de_partenaire;
-	xsd:string ?code_du_type_de_partenaire;
-	xsd:string ?type_de_partenaire;
 	dbp:number ?code_p;
 	dbo:Location ?pays_du_partenaire;
 	xsd:string ?code_d_appel_a_projet;
@@ -37,6 +32,5 @@ CONSTRUCT {
 FROM <file:test.csv>
 WHERE {
 	BIND (URI(CONCAT('http://ex.org/companies/', ?titre)) AS ?URI)
-	BIND (xsd:integer(?identifiant_de_partenaire) AS ?Id_part)
 	BIND (xsd:integer(?code_pays) AS ?code_p)	
 }
