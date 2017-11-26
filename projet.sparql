@@ -5,32 +5,40 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt>
 PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX apf: <http://jena.apache.org/ARQ/property#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX frapo: <http://purl.org/cerif/frapo/>
+PREFIX time: <https://www.w3.org/2006/time#>
 
 CONSTRUCT {
 
-?URI a doap:Project;
-	xsd:string ?code_du_projet;
+?URI_PROJECT rdf:type doap:Project;
+	owl:sameAs ?URI_PROJECT_HORIZON;
+	frapo:hasCode ?code_du_projet;
 	doap:name ?titre;
-	xsd:string ?Acronyme;
+	dbp:shortName ?Acronyme;
 	rdfs:label ?libelle_de_partenaire;
-	dbp:number ?code_p;
-	dbo:Location ?pays_du_partenaire;
-	xsd:string ?code_d_appel_a_projet;
+	dbo:Location ?pays;
+	frapo:hasCode ?code_d_appel_a_projet;
 	xsd:string ?appel_a_projet;
-	xsd:date ?date_de_debut;
-	xsd:date ?date_de_fin;
+	time:hasBeginning ?date_de_debut;
+	time:hasEnd ?date_de_fin;
 	doap:description ?resume;
-	xsd:integer ?duree;
-	xsd:float ?montant;
-	xsd:string ?code_theme;
-	doap:short-description ?theme;
+	time:Duration ?duree;
+	frapo:budgetedAmount ?montant;
+	frapo:hasCode ?code_theme;
+	foaf:topic ?theme;
 	xsd:string ?code_RCN;
-	doap:wiki ?lien_CORDIS;
+	doap:homepage ?lien_CORDIS;
 	dcat:keyword ?mots_cles;
 
 }
 FROM <file:test.csv>
+
 WHERE {
-	BIND (URI(CONCAT('http://ex.org/companies/', ?titre)) AS ?URI)
-	BIND (xsd:integer(?code_pays) AS ?code_p)	
+	BIND(URI(CONCAT("https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-aap-fp7-projets-retenus-participants-identifies/", ?code_du_projet)) AS ?URI_PROJECT)
+	BIND(URI(CONCAT("https://data.enseignementsup-recherche.gouv.fr/explore/dataset/appels-a-projets-horizon-2020-projets-retenus-et-participants-identifies/", ?code_du_projet)) AS ?URI_PROJECT_HORIZON)
+	#?pays apf:strSplit (?pays_du_partenaire ";")
+	#filter(BOUND(?pays_du_partenaire))
 }
