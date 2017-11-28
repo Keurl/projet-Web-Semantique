@@ -1,11 +1,25 @@
 
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix owl:  <http://www.w3.org/2002/07/owl#> 
+prefix frapo:  <http://purl.org/cerif/frapo/> 
+prefix xsd:  <http://www.w3.org/2001/XMLSchema#> 
+prefix rdfs:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt> 
+prefix dbo:  <http://dbpedia.org/ontology/> 
+prefix dbp:  <http://dbpedia.org/property/> 
+prefix doap:  <http://usefulinc.com/ns/doap#> 
+prefix rdf:  <http://www.w3.org/2000/01/rdf-schema#> 
+prefix apf:  <http://jena.apache.org/ARQ/property#> 
+prefix time:  <https://www.w3.org/2006/time#> 
+prefix dcat:  <http://www.w3.org/ns/dcat#> 
+prefix foaf:  <http://xmlns.com/foaf/0.1/> 
 
-SELECT ?titre ?date_de_debut
-FROM <testr.rdf>
-WHERE { ?titre xsd:date ?date_de_debut.
-		FILTER( ?date_de_debut < 2009)
-}
 
 
-/* requête multi dataset : liste des organisations ayant participés à la fois à notre dataset et à celui de l'autre groupe */
+
+SELECT ?titre ?date_deb_projet
+WHERE { ?x rdf:type doap:Project;
+           doap:name ?titre;
+           time:hasBeginning ?date_deb_projet.
+  FILTER(?date_deb_projet < "2009").}
+ORDER BY ?date_deb_projet
+
+
