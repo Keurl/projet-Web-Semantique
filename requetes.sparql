@@ -12,9 +12,9 @@ prefix time:  <https://www.w3.org/2006/time#>
 prefix dcat:  <http://www.w3.org/ns/dcat#>
 prefix foaf:  <http://xmlns.com/foaf/0.1/>
 
-#Requêtes vérifiées par fuseki sur serveur local version 3.4.0
+#Requ�tes v�rifi�es par fuseki sur serveur local version 3.4.0
 
-#nom et date de début des projets commencés avant 2009, rangé par date de début
+#nom et date de d�but des projets commenc�s avant 2009, rang� par date de d�but
 SELECT ?titre ?date_deb_projet
 WHERE { ?x rdf:type doap:Project;
            doap:name ?titre;
@@ -31,3 +31,20 @@ Where { ?x dbo:Location ?pays;
 }
 Order By ?argent
 Limit 10
+
+
+#projet ayant l'Allemagne comme partenaire
+SELECT ?titre
+WHERE { ?x rdf:type doap:Project;
+           doap:name ?titre;
+           dbo:Location ?pays.
+  			FILTER regex (?pays , "Allemagne")
+    SERVICE<http://localhost:3030/yannis>{
+    ?y rdf:type doap:Project;
+       doap:name ?titre;
+       org:linkedTo ?z.
+     ?z dbo:locationCountry  <http://dbpedia.org/page/Allemagne>.
+
+	}
+
+}
