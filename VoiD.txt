@@ -1,0 +1,38 @@
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+
+
+:cpr                a                        void:Dataset;
+                    dcterms:title            "Appels à projets 7ème PCRDT - Projets retenus et participants identifiés";
+                    dcterms:description      "Ce jeu de données présente les projets et participants des appels du 7ème Programme-Cadre de Recherche et de Développement Technologique (PCRDT).";
+                    void:exampleResource     <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+                    foaf:homepage            <https://github.com/Keurl/projet-Web-Semantique>;
+                    dcterms:contributor      :Univ_Nantes;
+                    dcterms:publisher        :Romain_Brohan;
+                    dcterms:publisher        :Samy_Gascoin_Fontaine;
+                    dcterms:created          "2017-11-30"^^xsd:date ;
+                    dcterms:modified         "2017-11-30"^^xsd:date ;
+                    dcterms:license          <https://www.etalab.gouv.fr/licence-ouverte-open-licence> ;
+                    void:feature             <http://www.w3.org/ns/formats/Turtle>;
+                    void:triples             9031. #A modifier
+
+:Univ_Nantes        a                        foaf:Organization;
+                    rdfs:label               "Université de Nantes";
+                    foaf:homepage            <http://www.univ-nantes.fr>.
+
+:Romain_Brohan    a                        foaf:Person;
+                    rdfs:label               "Romain Brohan";
+                    foaf:mbox                <romain.brohan@etu.univ-nantes.fr>.
+
+:Samy_Gascoin_Fontaine      a                        foaf:Person;
+                    rdfs:label               "Samy Gascoin-Fontaine";
+                    foaf:mbox                <samy.gascoin-fontaine@etu.univ-nantes.fr>.
+
+:cpr                a                        void:Linkset ;
+                    void:target              datas_H2020;
+                    void:linkedPredicate     owl:sameAs.
+
