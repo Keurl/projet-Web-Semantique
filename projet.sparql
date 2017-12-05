@@ -24,7 +24,7 @@ CONSTRUCT {
 	time:hasBeginning ?date_de_debut;
 	time:hasEnd ?date_de_fin;
 	doap:description ?resume;
-	time:hasTemporalDuration ?duree;
+	time:Duration ?duree;
 	frapo:budgetedAmount ?montant;
 	frapo:hasCode ?code_theme;
 	foaf:topic ?theme;
