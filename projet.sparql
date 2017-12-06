@@ -10,6 +10,7 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdf: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX frapo: <http://purl.org/cerif/frapo/>
 PREFIX time: <https://www.w3.org/2006/time#>
+PREFIX org: <https://www.w3.org/ns/org#>
 
 CONSTRUCT {
 
@@ -18,7 +19,6 @@ CONSTRUCT {
 	frapo:hasCode ?code_du_projet;
 	doap:name ?titre;
 	dbp:shortName ?Acronyme;
-	
 	frapo:hasCode ?code_d_appel_a_projet;
 	xsd:string ?appel_a_projet;
 	time:hasBeginning ?date_de_debut;
@@ -31,23 +31,18 @@ CONSTRUCT {
 	xsd:string ?code_RCN;
 	doap:homepage ?lien_CORDIS;
 	dcat:keyword ?mots_cles;
-	org:linkedTo ?URI_Partenaire;
-	?URI_Partenaire rdf:type ex:partenaire;
+	org:linkedTo ?URI_Partenaire.
+	?URI_Partenaire rdf:type dbo:partenaire;
 	     rdfs:subClassOf dbp:Agent;
 	     doap:name ?libelle_de_partenaire;
-	     ex:pays ?pays_du_partenaire.
+	     dbo:locationCountry ?pays.
 }
-FROM <file:test.csv>
-
+FROM <file:data.csv>
 WHERE {
 	BIND(URI(CONCAT("https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-aap-fp7-projets-retenus-participants-identifies/", ?code_du_projet)) AS ?URI_PROJECT)
 	BIND(URI(CONCAT("https://data.enseignementsup-recherche.gouv.fr/explore/dataset/appels-a-projets-horizon-2020-projets-retenus-et-participants-identifies/", ?code_du_projet)) AS ?URI_PROJECT_HORIZON)
 	BIND(URI(CONCAT("https://ex.org/partenaire", ?libelle_de_partenaire)) AS ?URI_Partenaire)
-	BIND(ex:pays rdfs:subClassOf dbo:Place)
-	#apf:strSplit permet de gérer les multivalue d'une colonne et de les séparer, mais il semble
-	#qu'il n'est possible de faire qu'un seul strSplit par dataset, hors nous avons deux attributs multivalues qui fonctionnent ensemble,
-	#nous devons donc soit split les deux attributs simultanément ou ne pas les split du tout afin de garder une cohérence des données.
-	#Et comme nous ne pouvons pas faire deux strSplit dans le même dataset, nous avons choisis de les laisser en multivalue.
-	#?pays apf:strSplit (?pays_du_partenaire ";")
-	#filter(BOUND(?pays_du_partenaire))
+	BIND(IF(bound(?pays_du_partenaire),?pays_du_partenaire,"null") AS ?test)
+	?separation apf:strSplit(?test ";")
+	BIND(IF(?separation = "null",?nothing,URI(CONCAT('http://dbpedia.org/page/', ?separation))) AS ?pays)
 }
