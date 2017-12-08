@@ -11,7 +11,7 @@ public class JenaReasoningWithRules
 	public static void main(String[] args) 
 	{
 		Model model = ModelFactory.createDefaultModel();
-		model.read( "dataset1.ttl" );
+		model.read( "rdffinal.ttl" );
 		
 		GenericRuleReasoner reasoner = new GenericRuleReasoner( Rule.rulesFromURL( "rules.txt" ) );
 		
