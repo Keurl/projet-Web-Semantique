@@ -1,0 +1,14 @@
+-------------------------------------------------------
+| pays                                  | argent      |
+=======================================================
+| <http://dbpedia.org/page/Royaume-Uni> | "999999.84" |
+| <http://dbpedia.org/page/Espagne>     | "999999.6"  |
+| <http://dbpedia.org/page/Autriche>    | "999999.14" |
+| <http://dbpedia.org/page/Royaume-Uni> | "999996.0"  |
+| <http://dbpedia.org/page/Su%C3%A8de>  | "999996.0"  |
+| <http://dbpedia.org/page/Italie>      | "99998.0"   |
+| <http://dbpedia.org/page/%C3%89gypte> | "999960.0"  |
+| <http://dbpedia.org/page/Allemagne>   | "999960.0"  |
+| <http://dbpedia.org/page/Chypre>      | "999960.0"  |
+| <http://dbpedia.org/page/France>      | "999960.0"  |
+-------------------------------------------------------
