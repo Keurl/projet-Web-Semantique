@@ -17,5 +17,4 @@
 [ruleRDFS9: (?u rdfs:subClassOf ?v) (?v rdfs:subClassOf ?x) -> (?u rdfs:subClassOf ?x)]
 [ruleRDFS10: (?u rdf:type ?v) (?v rdfs:subPropertyOf ?x) -> (?u rdfs:subPropertyOf ?x)]
 
-[ruleRDFSpartner: (?u rdf:type ex:partenaire) -> (?u rdfs:subClassOf dbp:Agent)]
 [ruleRDFSpays: (?u dbo:locationCountry ?v) -> (?v rdfs:subClassOf dbo:Place]
