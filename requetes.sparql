@@ -37,8 +37,8 @@ Limit 10
 SELECT ?titre
 WHERE { ?x rdf:type doap:Project;
            doap:name ?titre;
-           dbo:Location ?pays.
-  			FILTER regex (?pays , "Allemagne")
+           org:linkedTo ?a.
+     ?a dbo:locationCountry  <http://dbpedia.org/page/Allemagne>.
     SERVICE<http://localhost:3030/yannis>{
     ?y rdf:type doap:Project;
        doap:name ?titre;
