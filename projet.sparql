@@ -32,11 +32,9 @@ CONSTRUCT {
 	doap:homepage ?lien_CORDIS;
 	dcat:keyword ?mots_cles;
 	org:linkedTo ?URI_Partenaire.
-	?URI3 rdf:type owl:Thing.
 	?URI_Partenaire rdf:type dbo:projectParticipant;
 	     rdfs:subClassOf dbp:Agent;
 	     doap:name ?libelle_de_partenaire;
-		 dbo:type ?URI3;
 	     dbo:locationCountry ?pays.
 }
 FROM <file:data.csv#encoding=utf-8>
